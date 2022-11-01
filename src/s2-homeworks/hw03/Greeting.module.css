@@ -1,9 +1,7 @@
 .greetingForm {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
+
 }
 
 .inputAndButtonContainer {
@@ -11,7 +9,7 @@
 }
 
 .error {
-
+color: red;
 }
 
 .input {
@@ -45,6 +43,8 @@
 }
 
 .greeting {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
 }
 
 .inputClass {

@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from 'react'
 import s from './Greeting.module.css'
+import user from "../hw08/User";
 
 type GreetingPropsType = {
     name: string // need to fix any
