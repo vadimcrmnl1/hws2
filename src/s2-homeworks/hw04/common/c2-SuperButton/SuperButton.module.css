@@ -1,25 +1,39 @@
 .button {
-}
+    width: 129px;
+    height: 30px;
+ }
 
 .disabled {
+    background-color: #305c8f;
+    opacity: .5;
 }
 
 .secondary {
+    background-color: white;
+    color: #0066CC;
+    border: 1px solid #0066CC;
 }
 
 .default {
+    background-color: blue;
+    color: white;
 }
 
 .red {
+    background-color: red;
+    color: white;
 }
 
 .default:hover {
+
 }
 
 .red:hover {
+    background-color: #cc0000;
 }
 
 .secondary:hover {
+    background-color: #b4b4b4;
 }
 
 
@@ -33,4 +47,5 @@
 }
 
 .button:disabled {
+
 }
