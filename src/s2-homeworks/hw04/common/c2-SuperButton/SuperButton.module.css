@@ -1,11 +1,12 @@
 .button {
     width: 129px;
     height: 30px;
+
  }
 
 .disabled {
     background-color: #305c8f;
-    opacity: .5;
+
 }
 
 .secondary {
@@ -25,7 +26,7 @@
 }
 
 .default:hover {
-
+    background-color: #0032c7;
 }
 
 .red:hover {
