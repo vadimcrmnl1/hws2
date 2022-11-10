@@ -1,51 +1,49 @@
 .sidebar {
+
 }
+
 .open {
-    display: flex;
-   flex-direction: column;
-color: black;
-    justify-content: flex-start;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 27px;
-    /* identical to box height */
+    color: black;
+    font-size: 30px;
+    margin-left: 20px;
     text-decoration: none;
 }
+
+.open:hover {
+color: deepskyblue;
+}
+
 .sidebar.open {
-    position: absolute;
-    width: 317px;
-    height: 100%;
-    left: 0px;
-    top: 0px;
-color: black;
-    background: #FFFFFF;
-    box-shadow: 0px 10px 40px rgba(29, 33, 38, 0.13), 0px 1px 2px rgba(29, 33, 38, 0.1);
-    border-radius: 0px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: white;
+
 }
 
 .background {
-    color: black;
-    z-index: 3;
+
 }
 
 .nav {
+
 }
 
 .nav a {
+
 }
 
 .nav a:hover {
+
 }
 
 .nav a.active {
+
 }
+
 .close {
-    position: revert;
-border: none;
-    background: white;
+    color: green;
 }
 
 .close img {
