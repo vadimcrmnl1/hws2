@@ -10,8 +10,10 @@ type PropsType = {
 }
 
 export const Sidebar: FC<PropsType> = ({open, handleClose}) => {
-    const openClass = `${s.open} ${s.active}`
-    const sidebarClass = `${s.sidebar} ${open ? openClass : s.close}`
+
+    const closedSidebar = `${s.open} ${s.sidebar}`
+    const sidebarClass = s.sidebar
+
         // s.sidebar
         // + (open ? ' ' + s.open + ' ' + s.active : s.close)
 
@@ -44,6 +46,7 @@ export const Sidebar: FC<PropsType> = ({open, handleClose}) => {
                         to={PATH.JUNIOR}
                         onClick={handleClose}
                         className={sidebarClass}
+
                         // className={...} // делает студент
                     >
                         Junior

@@ -2,23 +2,20 @@
 
 }
 
+
 .open {
-    color: black;
-    font-size: 30px;
-    margin-left: 20px;
-    text-decoration: none;
+    background-color: darkgray;
+width: 350px;
+    height: 100%;
 }
 
 .open:hover {
-color: deepskyblue;
+    color: deepskyblue;
 }
 
 .sidebar.open {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    background-color: white;
+    position: absolute;
+
 
 }
 
@@ -27,24 +24,35 @@ color: deepskyblue;
 }
 
 .nav {
+display: flex;
+ flex-direction: column;
 
 }
 
 .nav a {
-
+ font-size: 30px;
+ color: black;
+ text-decoration: none;
 }
 
 .nav a:hover {
-
+    color: dodgerblue;
 }
 
-.nav a.active {
-
+nav a.active {
+ display: none;
+    color: red;
 }
+
 
 .close {
-    color: green;
+    background-color: deepskyblue;
+}
+
+.close.active {
+    background-color: #cc0000;
 }
 
 .close img {
+
 }

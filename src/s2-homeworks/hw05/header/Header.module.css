@@ -1,8 +1,14 @@
 .burgerMenuIcon {
+margin-left: 200px;
 }
 
 .header {
+
 }
 
 .header h1 {
+    font-size: 20px;
+    color: green;
+    text-align: right;
+    margin-right: 100px;
 }
