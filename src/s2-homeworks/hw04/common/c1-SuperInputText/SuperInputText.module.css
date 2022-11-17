@@ -1,13 +1,16 @@
 .input:focus {
+
 }
 
 .input {
     display: flex;
     position: relative;
-    width: 372px;
+    width: 276px;
     height: 36px;
-      border: 1px solid #D1D1D1;
+   padding: 10px;
     border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid gray;
 }
 
 .inputWrapper {
@@ -16,6 +19,7 @@
 }
 
 .superInput {
+
 }
 
 .errorInput {
