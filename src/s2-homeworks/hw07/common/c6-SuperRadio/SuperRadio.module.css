@@ -1,7 +1,10 @@
 .radio {
+
+    margin: 0 0 0 40px;
 }
 
 .radio::before {
+
 }
 
 
@@ -9,7 +12,11 @@
 }
 
 .label {
+
 }
 
 .options {
+}
+.span {
+    margin: 0 0 0 10px;
 }
