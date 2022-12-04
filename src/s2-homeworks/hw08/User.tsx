@@ -10,13 +10,14 @@ type UserPropsType = {
 const User: React.FC<UserPropsType> = ({ u }) => {
     return (
         <tr id={'hw8-user-' + u._id + '-' + u.age} className={s.item}>
-            <td id={'hw8-user-name-' + u._id} className={s.nameCol}>
+            <td id={'hw8-user-name-' + u._id} className={s.ageCol1}>
+                {u.name}
                 {/*отобразить имя*/}
 
             </td>
-            <td id={'hw8-user-age-' + u._id}>
+            <td id={'hw8-user-age-' + u._id} className={s.ageCol1}>
                 {/*отобразить возраст*/}
-
+                {u.age}
             </td>
         </tr>
     )
