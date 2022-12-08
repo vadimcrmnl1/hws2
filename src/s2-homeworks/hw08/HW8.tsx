@@ -37,7 +37,7 @@ const HW8 = () => {
             homeWorkReducer(initialPeople, {type: 'sort', payload: 'up'})
         ) // в алфавитном порядке a.name > b.name
         SortNameAC('up')
-        setCurrentSort('up')
+
     }
 
     const sortDown = () => {
@@ -45,14 +45,14 @@ const HW8 = () => {
             homeWorkReducer(initialPeople, {type: 'sort', payload: 'down'})
         ) // в обратном порядке a.name < b.name}
         SortNameAC('down')
-        setCurrentSort('down')
+
     }
     const check18 = () => {
         setPeople(
             homeWorkReducer(initialPeople, {type: 'check', payload: 18})
         ) // совершеннолетние
         CheckUsersAC(18)
-        setCurrentSort('18')
+
     }
 
     return (
