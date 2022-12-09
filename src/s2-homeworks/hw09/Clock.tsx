@@ -8,6 +8,8 @@ function Clock() {
     // for autotests // не менять // можно подсунуть в локалСторэдж нужную дату, чтоб увидеть как она отображается
     const [date, setDate] = useState<Date>(new Date(restoreState('hw9-date', Date.now())))
     const [show, setShow] = useState<boolean>(false)
+    const [disabled, setDisabled] = useState<boolean>(false)
+
 
     const start = () => {
         // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
@@ -16,11 +18,13 @@ function Clock() {
             setDate(new Date())
         }, 1000)
         setTimerId(+timerId)
+        setDisabled(!disabled)
     }
 
     const stop = () => {
         // пишут студенты // поставить часы на паузу, обнулить ид таймера (timerId <- undefined)
         clearInterval(timerId)
+        setDisabled(!disabled)
     }
 
     const onMouseEnter = () => { // пишут студенты // показать дату если наведена мышка
@@ -71,7 +75,7 @@ function Clock() {
                 <SuperButton
                     className={s.button}
                     id={'hw9-button-start'}
-                    disabled={false} // пишут студенты // задизэйблить если таймер запущен
+                    disabled={disabled} // пишут студенты // задизэйблить если таймер запущен
                     onClick={start}
                 >
                     start
@@ -79,7 +83,7 @@ function Clock() {
                 <SuperButton
                     className={s.button}
                     id={'hw9-button-stop'}
-                    disabled={false} // пишут студенты // задизэйблить если таймер не запущен
+                    disabled={!disabled} // пишут студенты // задизэйблить если таймер не запущен
                     onClick={stop}
                 >
                     stop
