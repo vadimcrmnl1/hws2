@@ -1,4 +1,4 @@
-import React, {SetStateAction, useState} from 'react'
+import React, {useState} from 'react'
 import s from './HW11.module.css'
 import s2 from '../../s1-main/App.module.css'
 import {restoreState, saveState} from '../hw06/localStorage/localStorage'
@@ -16,15 +16,14 @@ function HW11() {
     const [value2, setValue2] = useState(restoreState<number>('hw11-value2', 100))
 
     const change = (event: Event, value: number | number[]) => {
-        console.log(event)
-        console.log(value)
-        // saveState<number>('hw11-value1', value)
-        // saveState<number>('hw11-value2', value)
+
         if (typeof value === 'number') {
             setValue1(value)
+            saveState('hw11-value1', value1)
         } else {
             setValue1(value[0])
             setValue2(value[1])
+            saveState('hw11-value2', value2)
         }
 
         // пишет студент // если пришёл массив - сохранить значения в оба useState, иначе в первый
@@ -57,7 +56,7 @@ function HW11() {
                             // сделать так чтоб value1/2 изменялось // пишет студент
 
                         />
-                        <span id={'hw11-value-2'} className={s.number}>{value2}</span>
+                        <span id={'hw11-value-2'} className={s.number1}>{value2}</span>
                     </div>
                 </div>
             </div>
