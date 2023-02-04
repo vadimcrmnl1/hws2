@@ -1,7 +1,15 @@
 .buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 600px;
 }
 
 .responseContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .imageContainer {
@@ -10,13 +18,25 @@
 .image {
 }
 
-.textContainer{
+.textContainer {
+    padding-left: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
 }
 
 .code {
+    font-size: 40px;
+    font-weight: 500;
+
 }
 
 .text {
+    font-size: 20px;
+    font-weight: 500;
 }
+
 .info {
+    font-size: 20px;
+    font-weight: 500;
 }

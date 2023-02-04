@@ -14,11 +14,13 @@ import errorUnknown from './images/error.svg'
 * 3 - сделать стили в соответствии с дизайном
 * */
 
+
 const HW13 = () => {
     const [code, setCode] = useState('')
     const [text, setText] = useState('')
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
+    const [editMode, setEditMode] = useState<boolean>(false)
 
     const send = (x?: boolean | null) => () => {
         const url =
@@ -30,18 +32,45 @@ const HW13 = () => {
         setImage('')
         setText('')
         setInfo('...loading')
+        setEditMode(true)
 
         axios
             .post(url, {success: x})
             .then((res) => {
+                console.log(res)
                 setCode('Код 200!')
                 setImage(success200)
+                setText(res.data.errorText)
+                setInfo(res.data.info)
+
+
+
                 // дописать
 
             })
-            .catch((e) => {
-                // дописать
+            .catch((err) => {
+                if (err.code === "ERR_NETWORK") {
+                    setCode('Error!')
+                    setText(err.message)
+                    setInfo(err.name)
+                    setImage(errorUnknown)
 
+                    return
+                }
+                setCode(`Ошибка ${err.response.status}!`)
+                setText(err.response.data.errorText)
+                setInfo(err.response.data.info)
+
+                if (err.response.status === 400) {
+                    setImage(error400)
+                }
+                if (err.response.status === 500) {
+                    setImage(error500)
+                }
+
+            })
+            .finally(() => {
+                setEditMode(false)
             })
     }
 
@@ -55,6 +84,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
+                        disabled={editMode}
                         // дописать
 
                     >
@@ -64,6 +94,7 @@ const HW13 = () => {
                         id={'hw13-send-false'}
                         onClick={send(false)}
                         xType={'secondary'}
+                        disabled={editMode}
                         // дописать
 
                     >
@@ -73,6 +104,7 @@ const HW13 = () => {
                         id={'hw13-send-undefined'}
                         onClick={send(undefined)}
                         xType={'secondary'}
+                        disabled={editMode}
                         // дописать
 
                     >
@@ -82,6 +114,7 @@ const HW13 = () => {
                         id={'hw13-send-null'}
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
+                        disabled={editMode}
                         // дописать
 
                     >
