@@ -21,6 +21,15 @@ const HW13 = () => {
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
     const [editMode, setEditMode] = useState<boolean>(false)
+    const statesToResponse = (res: any) => {
+
+            setCode(res.status === 200 ? 'Код 200!' : res.code === 'ERR_NETWORK' ? 'Error!' : `Ошибка ${res.response.status}!`)
+            setImage(res.status === 200 ? success200 : res.code === 'ERR_NETWORK' ? errorUnknown : res.response.status === 400 ? error400 : error500)
+            setText(res.status === 200 ? res.data.errorText : res.code === 'ERR_NETWORK' ? res.message : res.response.data.errorText)
+            setInfo(res.status === 200 ? res.data.info : res.code === 'ERR_NETWORK' ? res.name : res.response.data.info)
+            return
+
+    }
 
     const send = (x?: boolean | null) => () => {
         const url =
@@ -38,39 +47,17 @@ const HW13 = () => {
             .post(url, {success: x})
             .then((res) => {
                 console.log(res)
-                setCode('Код 200!')
-                setImage(success200)
-                setText(res.data.errorText)
-                setInfo(res.data.info)
-
-
-
-                // дописать
+                statesToResponse(res)
 
             })
             .catch((err) => {
-                if (err.code === "ERR_NETWORK") {
-                    setCode('Error!')
-                    setText(err.message)
-                    setInfo(err.name)
-                    setImage(errorUnknown)
-
-                    return
-                }
-                setCode(`Ошибка ${err.response.status}!`)
-                setText(err.response.data.errorText)
-                setInfo(err.response.data.info)
-
-                if (err.response.status === 400) {
-                    setImage(error400)
-                }
-                if (err.response.status === 500) {
-                    setImage(error500)
-                }
+                console.log(err)
+                statesToResponse(err)
 
             })
             .finally(() => {
                 setEditMode(false)
+
             })
     }
 
