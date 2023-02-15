@@ -21,6 +21,9 @@ const HW13 = () => {
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
     const [editMode, setEditMode] = useState<boolean>(false)
+    // const setResponseData = (code: string, image: string, text: string, info: string) => {
+    //
+    // }
     const statesToResponse = (res: any) => {
 
             setCode(res.status === 200 ? 'Код 200!' : res.code === 'ERR_NETWORK' ? 'Error!' : `Ошибка ${res.response.status}!`)
