@@ -1,6 +1,10 @@
 .tech {
     width: 50vw;
 }
+.hw15Block {
+
+    opacity: 0.3;
+}
 
 .developer {
 
@@ -15,7 +19,7 @@
 }
 
 .row {
-    display: flex;
+    margin-top: 20px;
 }
 
 .rowHeader {
@@ -23,5 +27,6 @@
 }
 
 .loading {
-
+    position: absolute;
+    padding: 50px 0 0 300px;
 }

@@ -1,18 +1,20 @@
 import React, {useEffect, useState} from 'react'
 import s2 from '../../s1-main/App.module.css'
+import st from './../hw08/HW8.module.css'
 import s from './HW15.module.css'
 import axios from 'axios'
 import SuperPagination from './common/c9-SuperPagination/SuperPagination'
 import {useSearchParams} from 'react-router-dom'
 import SuperSort from './common/c10-SuperSort/SuperSort'
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress'
 
 /*
-* 1 - дописать SuperPagination
+* 1 - дописать SuperPagination +
 * 2 - дописать SuperSort
 * 3 - проверить pureChange тестами
-* 3 - дописать sendQuery, onChangePagination, onChangeSort в HW15
-* 4 - сделать стили в соответствии с дизайном
-* 5 - добавить HW15 в HW5/pages/JuniorPlus
+* 3 - дописать sendQuery, onChangePagination, onChangeSort в HW15 +
+* 4 - сделать стили в соответствии с дизайном +
+* 5 - добавить HW15 в HW5/pages/JuniorPlus +
 * */
 
 type TechType = {
@@ -52,7 +54,30 @@ const HW15 = () => {
         getTechs(params)
             .then((res) => {
                 // делает студент
+                if (res) {
+                    setLoading(false)
+                    const stateCopy = res.data.techs.map(t => ({...t}))
+                    if (sort[0] === '0') {
+                        stateCopy.sort(function (a, b) {
+                            let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
+                            if (nameA < nameB)
+                                return -1
+                            return 0
+                        })
+                    }
+                    if (sort[0] === '1') {
+                        stateCopy.sort(function (a, b) {
+                            let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
+                            if (nameA > nameB)
+                                return -1
+                            return 0
+                        })
+                    }
+                    setTechs(stateCopy)
+                    setTotalCount(res.data.totalCount)
 
+
+                }
                 // сохранить пришедшие данные
 
                 //
@@ -60,19 +85,45 @@ const HW15 = () => {
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
+        debugger
         // делает студент
 
-        // setPage(
-        // setCount(
+        if (count !== newCount) {
+            setCount(newCount)
+            sendQuery({page: page, count: newCount})
+        }
+        if (newPage !== page) {
+            setPage(newPage)
+            sendQuery({page: newPage, count: count})
+        }
 
-        // sendQuery(
-        // setSearchParams(
 
-        //
     }
 
     const onChangeSort = (newSort: string) => {
-        // делает студент
+        setSort(newSort)
+        // const stateCopy = techs.map(t => ({...t}))
+        // if (newSort[0] === '0') {
+        //     stateCopy.sort(function (a, b) {
+        //         let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
+        //         if (nameA < nameB)
+        //             return -1
+        //         return 0
+        //     })
+        // }
+        // if (newSort[0] === '1') {
+        //     stateCopy.sort(function (a, b) {
+        //         let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
+        //         if (nameA > nameB)
+        //             return -1
+        //         return 0
+        //     })
+        // }
+
+
+        setPage(1)
+        sendQuery({page: page, count: count})
+        setSearchParams(searchParams)
 
         // setSort(
         // setPage(1) // при сортировке сбрасывать на 1 страницу
@@ -90,24 +141,26 @@ const HW15 = () => {
         setCount(+params.count || 4)
     }, [])
 
-    const mappedTechs = techs.map(t => (
-        <div key={t.id} className={s.row}>
-            <div id={'hw15-tech-' + t.id} className={s.tech}>
-                {t.tech}
-            </div>
 
-            <div id={'hw15-developer-' + t.id} className={s.developer}>
+    const mappedTechs = techs.map(t => (
+        <tr className={st.item}>
+            <td className={st.ageCol1}>
+                {t.tech}
+            </td>
+            <td className={st.ageCol1}>
                 {t.developer}
-            </div>
-        </div>
+            </td>
+        </tr>
     ))
+
+    const hw15FinalClass = idLoading ? s.hw15Block : ''
 
     return (
         <div id={'hw15'}>
             <div className={s2.hwTitle}>Homework #15</div>
+            {idLoading && <div id={'hw15-loading'} className={s.loading}><CircularProgress size={'100px'}/></div>}
+            <div className={s2.hw + ' ' + hw15FinalClass}>
 
-            <div className={s2.hw}>
-                {idLoading && <div id={'hw15-loading'} className={s.loading}>Loading...</div>}
 
                 <SuperPagination
                     page={page}
@@ -116,19 +169,24 @@ const HW15 = () => {
                     onChange={onChangePagination}
                 />
 
-                <div className={s.rowHeader}>
-                    <div className={s.techHeader}>
-                        tech
-                        <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/>
-                    </div>
+                <table id={'hw8-users'} className={st.users + ' ' + s.row}>
+                    <thead className={st.thead}>
+                    <tr>
+                        <td className={st.nameCol}>
+                            Tech
+                            <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/></td>
 
-                    <div className={s.developerHeader}>
-                        developer
-                        <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
-                    </div>
-                </div>
+                        <td className={st.ageCol}>
+                            Developer
+                            <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
+                        </td>
+                    </tr>
+                    </thead>
 
-                {mappedTechs}
+                    <tbody>{mappedTechs}</tbody>
+                </table>
+
+
             </div>
         </div>
     )
