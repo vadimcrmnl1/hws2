@@ -183,22 +183,22 @@ const HW15 = () => {
                     onChange={onChangePagination}
                 />
 
-                <table id={'hw8-users'} className={st.users + ' ' + s.row}>
-                    <thead className={st.thead}>
-                    <tr>
-                        <td className={st.nameCol}>
+                <div id={'hw8-users'} className={st.users + ' ' + s.row}>
+                    <div className={st.thead}>
+                    <div>
+                        <span className={st.nameCol}>
                             Tech
-                            <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/></td>
+                            <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/></span>
 
-                        <td className={st.ageCol}>
+                        <span className={st.ageCol}>
                             Developer
                             <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
-                        </td>
-                    </tr>
-                    </thead>
+                        </span>
+                    </div>
+                    </div>
 
-                    <tbody>{mappedTechs}</tbody>
-                </table>
+                    <div>{mappedTechs}</div>
+                </div>
 
 
             </div>
