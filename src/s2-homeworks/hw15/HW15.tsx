@@ -172,9 +172,9 @@ const HW15 = () => {
     return (
         <div id={'hw15'}>
             <div className={s2.hwTitle}>Homework #15</div>
-            {idLoading && <div id={'hw15-loading'} className={s.loading}><CircularProgress size={'100px'}/></div>}
-            <div className={s2.hw + ' ' + hw15FinalClass}>
 
+            <div className={s2.hw + ' ' + hw15FinalClass}>
+                {idLoading && <div id={'hw15-loading'} className={s.loading}><CircularProgress size={'100px'}/></div>}
 
                 <SuperPagination
                     page={page}
@@ -182,26 +182,39 @@ const HW15 = () => {
                     totalCount={totalCount}
                     onChange={onChangePagination}
                 />
-
-                <div id={'hw8-users'} className={st.users + ' ' + s.row}>
-                    <div className={st.thead}>
-                    <div>
-                        <span className={st.nameCol}>
-                            Tech
-                            <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/></span>
-
-                        <span className={st.ageCol}>
-                            Developer
-                            <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
-                        </span>
-                    </div>
+                <div className={s.rowHeader}>
+                    <div className={s.techHeader}>
+                        Tech
+                        <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/>
                     </div>
 
-                    <div>{mappedTechs}</div>
+                    <div className={s.developerHeader}>
+                        Developer
+                        <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
+                    </div>
                 </div>
 
-
+                {mappedTechs}
             </div>
+                {/*<div id={'hw8-users'} className={st.users + ' ' + s.row}>*/}
+                {/*    <div className={st.thead}>*/}
+                {/*    <div>*/}
+                {/*        <span className={st.nameCol}>*/}
+                {/*            Tech*/}
+                {/*            <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/></span>*/}
+
+                {/*        <span className={st.ageCol}>*/}
+                {/*            Developer*/}
+                {/*            <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>*/}
+                {/*        </span>*/}
+                {/*    </div>*/}
+                {/*    </div>*/}
+
+                {/*    <div>{mappedTechs}</div>*/}
+                {/*</div>*/}
+
+
+
         </div>
     )
 }
