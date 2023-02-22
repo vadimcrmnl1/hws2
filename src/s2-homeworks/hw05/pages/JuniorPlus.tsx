@@ -18,7 +18,7 @@ function JuniorPlus() {
             <HW13 />
             <HW14/>
             <HW15/>
-            <div style={{marginBottom: '100px'}}></div>
+
 
 
         </div>

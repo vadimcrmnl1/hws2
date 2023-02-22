@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import s2 from '../../s1-main/App.module.css'
-import st from './../hw08/HW8.module.css'
 import s from './HW15.module.css'
 import axios from 'axios'
 import SuperPagination from './common/c9-SuperPagination/SuperPagination'
@@ -143,7 +142,7 @@ const HW15 = () => {
         setSort(newSort)
         setPage(1)
         sendQuery({page, count, sort: newSort})
-        const newSearch: {sort?: string} = sort ? {sort: newSort} : {}
+        const newSearch: { sort?: string } = sort ? {sort: newSort} : {}
         const {find, ...restQueries} = Object.fromEntries(searchParams)
         setSearchParams({...newSearch, ...restQueries})
     }
@@ -155,17 +154,27 @@ const HW15 = () => {
         setCount(+params.count || 4)
     }, [])
 
-
     const mappedTechs = techs.map(t => (
-        <tr className={st.item}>
-            <td className={st.ageCol1}>
+        <div key={t.id} className={s.row}>
+            <div id={'hw15-tech-' + t.id} className={s.tech}>
                 {t.tech}
-            </td>
-            <td className={st.ageCol1}>
+            </div>
+
+            <div id={'hw15-developer-' + t.id} className={s.developer}>
                 {t.developer}
-            </td>
-        </tr>
+            </div>
+        </div>
     ))
+    // const mappedTechs = techs.map(t => (
+    //     <tr className={st.item}>
+    //         <td className={st.ageCol1}>
+    //             {t.tech}
+    //         </td>
+    //         <td className={st.ageCol1}>
+    //             {t.developer}
+    //         </td>
+    //     </tr>
+    // ))
 
     const hw15FinalClass = idLoading ? s.hw15Block : ''
 
@@ -196,25 +205,6 @@ const HW15 = () => {
 
                 {mappedTechs}
             </div>
-                {/*<div id={'hw8-users'} className={st.users + ' ' + s.row}>*/}
-                {/*    <div className={st.thead}>*/}
-                {/*    <div>*/}
-                {/*        <span className={st.nameCol}>*/}
-                {/*            Tech*/}
-                {/*            <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/></span>*/}
-
-                {/*        <span className={st.ageCol}>*/}
-                {/*            Developer*/}
-                {/*            <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>*/}
-                {/*        </span>*/}
-                {/*    </div>*/}
-                {/*    </div>*/}
-
-                {/*    <div>{mappedTechs}</div>*/}
-                {/*</div>*/}
-
-
-
         </div>
     )
 }
