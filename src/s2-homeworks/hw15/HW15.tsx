@@ -55,27 +55,70 @@ const HW15 = () => {
             .then((res) => {
                 // делает студент
                 if (res) {
-                    setLoading(false)
-                    const stateCopy = res.data.techs.map(t => ({...t}))
-                    if (sort[0] === '0') {
-                        stateCopy.sort(function (a, b) {
-                            let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
-                            if (nameA < nameB)
-                                return -1
-                            return 0
-                        })
-                    }
-                    if (sort[0] === '1') {
-                        stateCopy.sort(function (a, b) {
-                            let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
-                            if (nameA > nameB)
-                                return -1
-                            return 0
-                        })
-                    }
-                    setTechs(stateCopy)
-                    setTotalCount(res.data.totalCount)
 
+
+                    // const stateCopy = res.data.techs.map(t => ({...t}))
+                    //
+                    // if (sort[1] === 't') {
+                    //     if (sort === '') {
+                    //         return stateCopy
+                    //     }
+                    //     if (sort === '0tech') {
+                    //         stateCopy.sort(function (a, b) {
+                    //             let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
+                    //             if (nameA < nameB)
+                    //                 return -1
+                    //
+                    //             return 0
+                    //         })
+                    //     }
+                    //     if (sort === '1tech') {
+                    //         stateCopy.sort(function (a, b) {
+                    //             let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
+                    //             if (nameA > nameB)
+                    //                 return -1
+                    //
+                    //             return 0
+                    //         })
+                    //     }
+                    // }
+                    // if (sort[1] === 'd') {
+                    //     if (sort[0] === '0') {
+                    //         stateCopy.sort(function (a, b) {
+                    //             let nameA = a.developer.toLowerCase(), nameB = b.developer.toLowerCase()
+                    //             if (nameA < nameB)
+                    //                 return -1
+                    //             return 0
+                    //         })
+                    //     }
+                    //     if (sort[0] === '1') {
+                    //         stateCopy.sort(function (a, b) {
+                    //             let nameA = a.developer.toLowerCase(), nameB = b.developer.toLowerCase()
+                    //             if (nameA > nameB)
+                    //                 return -1
+                    //             return 0
+                    //         })
+                    //     }
+                    // }
+                    // if (sort[0] === '0') {
+                    //     stateCopy.sort(function (a, b) {
+                    //         let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
+                    //         if (nameA < nameB)
+                    //             return -1
+                    //         return 0
+                    //     })
+                    // }
+                    // if (sort[0] === '1') {
+                    //     stateCopy.sort(function (a, b) {
+                    //         let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
+                    //         if (nameA > nameB)
+                    //             return -1
+                    //         return 0
+                    //     })
+                    // }
+                    setTechs(res.data.techs)
+                    setTotalCount(res.data.totalCount)
+                    setLoading(false)
 
                 }
                 // сохранить пришедшие данные
@@ -85,53 +128,24 @@ const HW15 = () => {
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
-        debugger
+
         // делает студент
-
-        if (count !== newCount) {
-            setCount(newCount)
-            sendQuery({page: page, count: newCount})
-        }
-        if (newPage !== page) {
-            setPage(newPage)
-            sendQuery({page: newPage, count: count})
-        }
-
+        setCount(newCount)
+        setPage(newPage)
+        sendQuery({page: newPage, count: newCount})
+        const newSearch: { page?: string, count?: string } = page ? {page: '' + newPage, count: '' + newCount} : {}
+        const {search, ...restQueries} = Object.fromEntries(searchParams)
+        setSearchParams({...newSearch, ...restQueries})
 
     }
 
     const onChangeSort = (newSort: string) => {
         setSort(newSort)
-        // const stateCopy = techs.map(t => ({...t}))
-        // if (newSort[0] === '0') {
-        //     stateCopy.sort(function (a, b) {
-        //         let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
-        //         if (nameA < nameB)
-        //             return -1
-        //         return 0
-        //     })
-        // }
-        // if (newSort[0] === '1') {
-        //     stateCopy.sort(function (a, b) {
-        //         let nameA = a.tech.toLowerCase(), nameB = b.tech.toLowerCase()
-        //         if (nameA > nameB)
-        //             return -1
-        //         return 0
-        //     })
-        // }
-
-
         setPage(1)
-        sendQuery({page: page, count: count})
-        setSearchParams(searchParams)
-
-        // setSort(
-        // setPage(1) // при сортировке сбрасывать на 1 страницу
-
-        // sendQuery(
-        // setSearchParams(
-
-        //
+        sendQuery({page, count, sort: newSort})
+        const newSearch: {sort?: string} = sort ? {sort: newSort} : {}
+        const {find, ...restQueries} = Object.fromEntries(searchParams)
+        setSearchParams({...newSearch, ...restQueries})
     }
 
     useEffect(() => {

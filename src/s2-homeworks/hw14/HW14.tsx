@@ -40,7 +40,7 @@ const HW14 = () => {
                     setLoading(false)
                 }
 
-                console.log(res)
+
                 // сохранить пришедшие данные
 
                 //
